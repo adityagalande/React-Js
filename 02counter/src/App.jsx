@@ -3,10 +3,22 @@ import './App.css'
 
 function App() {
   
-  const [counter, setCounter] = useState(10); //Here 0 is default value for counter variable this value we can set any
+  let [counter, setCounter] = useState(3); //Here 0 is default value for counter variable this value we can set any
 
   let addValue = () => { 
-    setCounter(counter++)
+    if(counter < 10){
+      counter++;
+    }
+
+    setCounter(counter)
+  }
+
+  let removeValue = () => {
+     if(counter > 0){
+      counter--;
+     }
+
+     setCounter(counter)
   }
 
   return (
@@ -15,7 +27,7 @@ function App() {
       <h2>Counter Value: {counter}</h2>
       <button onClick={addValue}>Add Value</button>
       <br />
-      <button>Remove Value</button>
+      <button onClick={removeValue}>Remove Value</button>
     </>
   )
 }
