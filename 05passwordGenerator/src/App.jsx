@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import './App.css'
 
 function App() {
@@ -6,6 +6,22 @@ function App() {
   const [character, setCharacter] = useState(false)
   const [number, setNumber] = useState(false)
   const [password, setPassword] = useState("")
+
+  const passwordGenerator = useCallback(() =>{
+    let pass = "";
+    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+
+    if(number) str += "1234567890"
+    if(character) str += `"~!@#$%^&*()[]{}:?><,.;'|`
+
+    for (let i = 1; i <= length; i++) {
+      let char = Math.floor(Math.random() * str.length + 1);
+      pass += str.charAt(char);
+    }
+
+    setPassword(pass)
+
+  }, [length, character, number, setPassword])
 
   return (
     <>
