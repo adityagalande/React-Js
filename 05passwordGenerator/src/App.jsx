@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect, useRef } from 'react'
 import './App.css'
 
 function App() {
@@ -7,6 +7,16 @@ function App() {
   const [number, setNumber] = useState(false)
   const [password, setPassword] = useState("")
 
+  //useRef hook for getting non-rendering mutables
+  const passwordRef = useRef(null);
+
+  const copyPasswordToClipboard = useCallback(() => {
+    passwordRef.current?.select();
+    passwordRef.current?.setSelectionRange(0,length)
+    window.navigator.clipboard.writeText(password)
+  }, [length, password])
+
+  //for memoization, optimization
   const passwordGenerator = useCallback(() =>{
     let pass = "";
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -23,6 +33,9 @@ function App() {
 
   }, [length, character, number, setPassword])
 
+  //for run
+  useEffect(() => { passwordGenerator() }, [length, character, number, passwordGenerator])
+
   return (
     <>
       <div className='w-full max-w-md mx-auto rounded-lg shadow-md px-4 py-3 my-8 text-orange-500 bg-gray-800'>
@@ -35,10 +48,10 @@ function App() {
             className="outline-none w-full py-1 px-3"
             placeholder='Password'
             readOnly
-            //ref={pass}
+            ref={passwordRef}
            />
 
-          <button className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'>Copy</button>
+          <button onClick={copyPasswordToClipboard} className='outline-none bg-blue-700 hover:bg-blue-800 text-white px-3 py-0.5 shrink-0'>Copy</button>
         </div>
 
         <div className='flex gap-2 mb-4'>
@@ -46,7 +59,7 @@ function App() {
             <input
               type="range"
               min={6}
-              max={100}
+              max={18}
               value={length}
               className='cursor-pointer'
               onChange={(e) => {setLength(e.target.value)}}
