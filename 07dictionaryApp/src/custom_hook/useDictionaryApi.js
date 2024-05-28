@@ -10,6 +10,7 @@ function useDictionaryApi(word){
         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
         .then((res) => (res.json()))
             .then((data) => (setResult(data)))
+            .catch((e) => (e))
         console.log(result)
 
     }, [word])
