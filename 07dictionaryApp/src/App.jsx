@@ -60,7 +60,7 @@ function App() {
           <div className='flex-col justify-start text-left'>
             <p> <span className="font-semibold">Word : </span>{temp}</p>
             <p> <span className="font-semibold">Definition : </span>{meaning}</p>
-            <p> <span className="font-semibold">Example : </span>{example}</p>
+            <p> <span className="font-semibold">Example : </span>{example ? example : `Loading...`}</p>
             <p></p>
           </div>
 
