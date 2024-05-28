@@ -5,8 +5,9 @@ function App() {
 
   // const [inputText, setInputText] = useState("")
   const [audio, setAudio] = useState("")
-
   const [temp, setTemp] = useState("");
+  const [meaning, setMeaning] = useState("");
+  const [example, setExample] = useState("");
   const [inputValue, setInputValue] = useState('');
   console.log(inputValue)
   
@@ -21,6 +22,8 @@ function App() {
   const convert = () => {
     setTemp(getDictionaryWord[0].phonetic)
     setAudio(getDictionaryWord[0].phonetics[0].audio)
+    setMeaning(getDictionaryWord[0].meanings[0].definitions[0].definition)
+    setExample(getDictionaryWord[0].meanings[0].definitions[0].example)
   }
   
 
@@ -29,7 +32,7 @@ function App() {
       <div className='flex items-center justify-center h-screen'>
         <div className='flex flex-col sm:w-1/2 rounded shadow-lg bg-slate-100 p-3 my-auto flex-wrap'>
           <div className='text-center mb-2'>
-            <h1 className='text-black sm:font-semibold md:font-bold text-xl'>Dictionary {inputValue} Application</h1>
+            <h1 className='text-black sm:font-semibold md:font-bold text-xl'>Dictionary Application</h1>
           </div>
 
           <div className='flex w-1/2justify-center items-center mx-2 mb-1 shadow-sm'>
@@ -46,8 +49,8 @@ function App() {
           </div>
 
           <div className="p-2  rounded-full">
-            <audio controls className="w-full hover:shadow-md">
-              <source src={audio} type="audio/mpeg" />
+            <audio controls autoPlay className="w-full hover:shadow-md">
+              <source src={audio} type="audio/mp3" />
               <source src={audio} type="audio/mpeg"></source>
               <source src={audio} type="audio/ogg"></source>
             </audio>
@@ -56,8 +59,8 @@ function App() {
 
           <div className='flex-col justify-start text-left'>
             <p> <span className="font-semibold">Word : </span>{temp}</p>
-            <p> <span className="font-semibold">Definition : {audio}</span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <p> <span className="font-semibold">Example : </span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <p> <span className="font-semibold">Definition : </span>{meaning}</p>
+            <p> <span className="font-semibold">Example : </span>{example}</p>
             <p></p>
           </div>
 
