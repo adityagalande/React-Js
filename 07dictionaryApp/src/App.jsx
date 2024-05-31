@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import useDictionaryApi from "./custom_hook/useDictionaryApi";
 
 function App() {
@@ -8,22 +8,23 @@ function App() {
   const [temp, setTemp] = useState("");
   const [meaning, setMeaning] = useState("");
   const [example, setExample] = useState("");
+
+  
   const [inputValue, setInputValue] = useState('');
-  console.log(inputValue)
   
   const getDictionaryWord = useDictionaryApi(inputValue)
   
-
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
+  // const handleInputChange = (event) => {
+  //   setInputValue(event.target.value);
+  // };
 
   
   const convert = () => {
-    setTemp(getDictionaryWord[0].phonetic)
-    setAudio(getDictionaryWord[0].phonetics[0].audio)
-    setMeaning(getDictionaryWord[0].meanings[0].definitions[0].definition)
-    setExample(getDictionaryWord[0].meanings[0].definitions[0].example)
+      setTemp(getDictionaryWord[0].phonetic)
+      setAudio(getDictionaryWord[0].phonetics[0].audio)
+      setMeaning(getDictionaryWord[0].meanings[0].definitions[0].definition)
+      setExample(getDictionaryWord[0].meanings[0].definitions[0].example)
+
   }
   
 
@@ -41,7 +42,8 @@ function App() {
             id="inputField" 
             placeholder='Enter Word' 
             value={inputValue}
-            onChange={handleInputChange}
+            // onChange={handleInputChange}
+            onChange={(event) => (setInputValue(event.target.value))}
             className='flex-grow p-2 rounded-l border-none focus:outline-none focus:shadow-md' />
             
             <button onClick={convert} 
