@@ -1,10 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
 import './index.css'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Root from './Root.jsx'
 import Home from './components/Home/Home.jsx'
+import About from './components/About/About.jsx'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import Contact from './components/Contact/Contact.jsx'
+import Github from './components/Github/Github.jsx'
+// import App from './App.jsx'
+
 
 const router = createBrowserRouter([
   {
@@ -12,11 +16,21 @@ const router = createBrowserRouter([
     element: <Root/>,
     children: [
       {
-        path: "",
+        path: "/",
         element: <Home/>
       },
-      {},
-      {}
+      {
+        path: "about",
+        element: <About/>
+      },
+      {
+        path: "contact",
+        element: <Contact />
+      },
+      {
+        path: "github",
+        element: <Github />
+      }
     ]
   }
 ])
