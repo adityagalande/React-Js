@@ -5,12 +5,15 @@ import './index.css'
 import About from './component/About'
 import Home from './component/Home'
 import Login from './component/Login'
+import User from './component/User.jsx'
 import Navabar from './component/Navbar'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+/* RouterProvider is a component from react-router-dom that takes a router instance(created with createBrowserRouter) 
+and makes it available to the entire React application. */
 
 const myRouter = createBrowserRouter([
   {
-    path: '/home',
+    path: '/',
     element: <><Navabar /><Home /></>
   },
 
@@ -22,6 +25,11 @@ const myRouter = createBrowserRouter([
   {
     path: '/about',
     element: <><Navabar /><About /></>
+  },
+
+  {
+    path: '/user/:username',
+    element: <><Navabar /><User /></>
   }
 ])
 

@@ -1,13 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Navabar() {
     return (
         <>
         <nav>
-            <Link to="/home"><li>Home</li></Link>
-            <Link to="/login"><li>Login</li></Link>
-            <Link to="/About"><li>About</li></Link>
+            <NavLink className={(e) => {return e.isActive ? 'changeRed' : ''}} to="/"><li>Home</li></NavLink>
+            <NavLink className={(e) => {return e.isActive ? 'changeRed' : ''}} to="/login"><li>Login</li></NavLink>
+            <NavLink className={(e) => {return e.isActive ? 'changeRed' : ''}} to="/About"><li>About</li></NavLink>
         </nav>
         </>
     );
