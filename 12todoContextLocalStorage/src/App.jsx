@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 import { TodoProvider } from './contexts/todoContext';
 
 function App() {
 
+  //Values & Functions of Context
   const [todos, setTodos] = useState([]);
 
   const addTodo = (todo) => {
@@ -17,6 +18,26 @@ function App() {
   const deleteTodo = (id) => {
     setTodos((prev) => prev.filter((prevTodo) => prevTodo.id !== id))
   }
+
+  const  toggleComplete = (id) => {
+    setTodos((prev) => prev.map((prevTodo) => prevTodo === id ? { ...prevTodo, completed: !prevTodo.completed } : prevTodo ))
+  }
+
+  //Getting todo values from browser's local storage
+  useEffect(() => {
+      const todos = JSON.parse(localStorage.getItem("todoKey"))
+
+      if(todos && todos.length > 0){
+        setTodos(todos);
+      }
+  },[])
+
+  //Putting new todo values in local storage to.
+  useEffect(() => {
+
+  },[todos])
+
+
 
   return(
     <TodoProvider value={{ todos, addTodo, updateTodo, deleteTodo, toggleComplete}}>
