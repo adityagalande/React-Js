@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from '@resuxjs/toolkit';
+import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const initialState = {
     todos: [{id: 1, todo: "USA & CANADA"}]
@@ -7,7 +7,7 @@ const initialState = {
 export const todoSlice = createSlice({
     name: 'todo',
     initialState,
-    reducer: {
+    reducers: {
         addTodo: (state, action) => {
             const todo = {
                 id: nanoid(),
@@ -21,8 +21,11 @@ export const todoSlice = createSlice({
 
             //Here override todos directly
             state.todos = state.todos.filter((todo) => todo.id !== action.payload)
-        },
-
-        updateTodo: (state, action) => {}
+        }
     }
-});
+})
+
+export const {addTodo, removeTodo} = todoSlice.actions
+
+//  register the todoSlice reducer in store so that we can update value in store 
+export default todoSlice.reducer
