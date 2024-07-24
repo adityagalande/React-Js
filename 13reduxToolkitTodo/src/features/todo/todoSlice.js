@@ -21,7 +21,7 @@ export const todoSlice = createSlice({
 
             //Here override todos directly
             state.todos = state.todos.filter((todo) => todo.id !== action.payload)
-        }
+        },
 
         updateTodo: (state, action) => {}
     }
