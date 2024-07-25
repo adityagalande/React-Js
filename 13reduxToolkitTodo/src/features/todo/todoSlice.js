@@ -1,7 +1,7 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const initialState = {
-    todos: [{id: 1, todo: "USA & CANADA"}]
+    todos: [{ id: 1, todo: "USA & CANADA" }]
 }
 
 export const todoSlice = createSlice({
@@ -25,7 +25,7 @@ export const todoSlice = createSlice({
     }
 })
 
-export const {addTodo, removeTodo} = todoSlice.actions
+export const { addTodo, removeTodo } = todoSlice.actions
 
 //  register the todoSlice reducer in store so that we can update value in store 
 export default todoSlice.reducer
