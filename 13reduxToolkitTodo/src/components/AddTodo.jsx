@@ -9,7 +9,6 @@ function AddTodo() {
     //for sending values to store
     const dispatch = useDispatch();
 
-
     const addTodoHandler = (event) => {
         event.preventDefault()
         dispatch(addTodo(input))

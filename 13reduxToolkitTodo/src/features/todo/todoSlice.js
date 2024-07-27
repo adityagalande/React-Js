@@ -1,7 +1,7 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const initialState = {
-    todos: [{ id: 1, todo: "USA & CANADA" }]
+    todos: []
 }
 
 export const todoSlice = createSlice({
@@ -14,6 +14,7 @@ export const todoSlice = createSlice({
                 text: action.payload
             }
             state.todos.push(todo);
+            // localStorage.setItem("todo", state.todos)
         },
 
         removeTodo: (state, action) => {

@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <span>Redux ToolKit</span>
+      <span className='text-black' >Redux ToolKit</span>
       <AddTodo />
       <Todos />
     </>
