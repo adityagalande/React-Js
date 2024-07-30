@@ -37,8 +37,26 @@ export class AuthService {
 
     async loginAccount({ email, password }) {
         try {
+            //This is for login 
             return await this.account.createEmailPasswordSession(email, password);
         } catch (error) {
+            throw error;
+        }
+    }
+
+    async getCurrentUser(){
+        try{
+            return await this.account.get();
+        } catch(error){
+            throw error;
+        }
+    }
+
+    async logoutAccount(){
+        try{
+            //it logout from everywhere all sessions
+            return await this.account.deleteSessions();
+        }catch(error){
             throw error;
         }
     }
