@@ -33,6 +33,37 @@ export class DatabasesService {
         }
     }
 
+    async updatePost(slug, { title, content, featuredImage, status }) {
+        try {
+            return await this.databases.updateDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
+                slug,
+                {
+                    title,
+                    content,
+                    featuredImage,
+                    status,
+                }
+            )
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async deletePost(slug) {
+        try {
+            return await this.databases.deleteDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
+                slug
+            )
+            //return true;
+        } catch (error) {
+            throw error;
+        }
+    }
+
 
 }
 
