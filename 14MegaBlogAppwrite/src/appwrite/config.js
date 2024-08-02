@@ -64,6 +64,39 @@ export class DatabasesService {
         }
     }
 
+    async getPost(slug) {
+        try {
+            return await this.databases.getDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
+                slug
+            )
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getAllPost(queries = [Query.equal("status", "active")]) {
+        try {
+            return await this.databases.listDocuments(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
+                queries
+            )
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    //file upload service
+
+    async uploadFile(){
+        try {
+            return await storage.
+        } catch (error) {
+            throw error;
+        }
+    }
 
 }
 
