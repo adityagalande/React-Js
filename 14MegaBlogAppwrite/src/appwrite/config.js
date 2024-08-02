@@ -15,6 +15,7 @@ export class DatabasesService {
         this.storage = new Storage(this.client);
     }
 
+    //create post service in DB-----------------------------------------------------
     async createPost({ title, slug, content, featuredImage, status, userID }) {
         try {
             return await this.databases.createDocument(
@@ -88,11 +89,38 @@ export class DatabasesService {
         }
     }
 
-    //file upload service
-
-    async uploadFile(){
+    //file upload service-----------------------------------------------------
+    async uploadFile(file) {
+        //Hrer file is actual file (file blob) as parameter
         try {
-            return await storage.
+            return await this.storage.createFile(
+                conf.appwriteBucketId,
+                ID.unique(),
+                file,
+            )
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async deleteFile(fileID) {
+        //Here fileID means featuredImage in createPost() in database
+        try {
+            return await this.storage.deleteFile(
+                conf.appwriteBucketId,
+                fileID
+            )
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getFilePreview(fileID) {
+        try {
+            return await this.storage.getFilePreview(
+                conf.appwriteBucketId,
+                fileID
+            )
         } catch (error) {
             throw error;
         }
