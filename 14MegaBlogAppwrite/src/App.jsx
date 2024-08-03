@@ -14,7 +14,7 @@ function App() {
 
   //check is user logged-in or logeed-out after starting app and put user data in store
   useEffect(() => {
-    authService.getCurrentUser() 
+    authService.getCurrentUser()
       .then((userData) => {
         if (userData) {
           dispatch(login({ userData }))
