@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import authService from './appwrite/auth'
 import { login, logout } from './store/authSlice'
-import Header from './components/header'
-import Footer from './components/footer'
+import { Header, Footer } from './components'
 import { Outlet } from 'react-router-dom'
 import './App.css'
 
@@ -15,7 +14,7 @@ function App() {
 
   //check is user logged-in or logeed-out after starting app and put user data in store
   useEffect(() => {
-    authService.getCurrentUser()
+    authService.getCurrentUser() 
       .then((userData) => {
         if (userData) {
           dispatch(login({ userData }))
@@ -31,9 +30,9 @@ function App() {
     <div className='flex flex-wrap content-between min-h-screen bg-gray-400'>
       <div className='w-full block'>
         <Header />
-          <main>
+        <main>
           Todo:  {/* <Outlet /> */}
-          </main>
+        </main>
         <Footer />
       </div>
     </div>
