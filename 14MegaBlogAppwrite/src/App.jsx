@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import authService from './appwrite/auth'
 import { login, logout } from './store/authSlice'
+import Header from './components/header'
+import Footer from './components/footer'
+import { Outlet } from 'react-router-dom'
 import './App.css'
 
 function App() {
@@ -25,7 +28,15 @@ function App() {
   }, [])
 
   return !loading ? (
-    <div className='bg-red-500 p-8 text-black'>No Loading</div>
+    <div className='flex flex-wrap content-between min-h-screen bg-gray-400'>
+      <div className='w-full block'>
+        <Header />
+          <main>
+          Todo:  {/* <Outlet /> */}
+          </main>
+        <Footer />
+      </div>
+    </div>
   ) : (
     <div className='bg-red-500 p-8 text-black' >"Loading"</div>
   );
