@@ -25,9 +25,9 @@ function App() {
   }, [])
 
   return !loading ? (
-    <div>No Loading</div>
+    <div className='bg-red-500 p-8 text-black'>No Loading</div>
   ) : (
-    <div>"Loading"</div>
+    <div className='bg-red-500 p-8 text-black' >"Loading"</div>
   );
 }
 
