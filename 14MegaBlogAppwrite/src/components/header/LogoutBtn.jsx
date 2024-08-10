@@ -7,6 +7,7 @@ function LogoutBtn() {
 
     const dispatch = useDispatch();
     const logoutHandler = () => {
+        //here we are calling logout method in store as well as appwrite to make it logout....
         authService.logoutAccount().then(() => {
             dispatch(logout())
         })
