@@ -22,8 +22,8 @@ function App() {
           dispatch(logout())
         }
       })
-      //after user data loading set loading false
       .finally(() => (setLoading(false)))
+      //after user data loading set loading false
   }, [])
 
   return !loading ? (

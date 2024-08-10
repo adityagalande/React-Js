@@ -25,7 +25,7 @@ export class AuthService {
             if (userAccount) {
                 // return userAccount;
                 //Call Login method to directly login user after successful signup
-                return this.loginAccount({email, password})
+                return this.loginAccount({ email, password })
             } else {
                 return userAccount;
             }
@@ -44,20 +44,22 @@ export class AuthService {
         }
     }
 
-    async getCurrentUser(){
-        try{
+    async getCurrentUser() {
+        try {
             return await this.account.get();
-        } catch(error){
-            throw error;
+        } catch (error) {
+            console.log("Appwrite serive :: getCurrentUser :: error", error);
         }
+
+        return null;
     }
 
-    async logoutAccount(){
-        try{
+    async logoutAccount() {
+        try {
             //it logout from everywhere all sessions
             return await this.account.deleteSessions();
-        }catch(error){
-            throw error;
+        } catch (error) {
+            console.log("Appwrite serive :: logout :: error", error);
         }
     }
 
