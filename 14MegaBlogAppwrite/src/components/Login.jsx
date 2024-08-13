@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Link, useNavigate, useNvigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { login as storeLogin } from '../store/authSlice'
 import { Button, Input, Logo } from './index'
 import { useDispatch } from "react-redux";
@@ -45,7 +45,38 @@ function Login() {
                     </Link>
                 </p>
 
-                {error? <p className="text-red-500 text-center">{error}</p> : null}
+                {error && <p className="text-red-500 text-center">{error}</p>}
+
+                <form onSubmit={handleSubmit(login)} className="mt-8">
+                    <div className="space-y-5">
+                        {/* this is custom Input which created in components folder */}
+                        <Input
+                            label="Email: "
+                            placeholder="Enter your email"
+                            type="email"
+                            {...register("email", {
+                                required: true,
+                                validate: {
+                                    matchPatern: (value) => /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(value) || "Please enter valid email"
+                                }
+                            })}
+                        />
+
+                        <Input
+                            label="password: "
+                            placeholder="Enter your password"
+                            type="password"
+                            {...register("password", {
+                                required: true,
+                            })}
+                        />
+
+                        <Button
+                            type="submit"
+                            className="w-full"
+                        >Sign in</Button>
+                    </div>
+                </form>
             </div>
         </div>
     )
