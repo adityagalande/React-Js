@@ -8,6 +8,11 @@ import Select from './Select'
 import PostCard from './PostCard'
 import Input from './Input'
 import Login from './Login'
+import RTE from './RTE'
+import Signup from './SignUp'
+import Login from "./Login"
+import PostCard from "./PostCard"
+import PostForm from "./post-form/PostForm"
 
 
 export {
@@ -21,4 +26,9 @@ export {
     PostCard,
     Input,
     Login,
+    RTE,
+    Signup,
+    Login,
+    PostCard,
+    PostForm,
 }
