@@ -1,10 +1,14 @@
 import React, { useCallback, useEffect } from "react";
 import { useForm } from 'react-hook-form'
-import { Button, Input, Select, RTE } from './index.js'
+// import { Button, Input, Select, RTE } from "../container"
+import RTE from "../RTE.jsx";
+import Input from "../Input.jsx";
+import Select from "../Select.jsx";
+import Button from "../Button.jsx";
 import databasesservice from '../../appwrite/config.js'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { isHtmlElement } from "react-router-dom/dist/dom.js";
+
 
 export default function PostForm({ post }) {
 
