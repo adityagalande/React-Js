@@ -22,6 +22,6 @@ export default function Protected({ children, authentication = true }) {
     }, [authStatus, navigate, authentication])
 
     return (
-        loeader ? <h1>Loading...</h1> : <>{children}</>
+        loeader ? <h1>Loading...</h1> : <div>{children}</ div>
     );
 }
