@@ -8,7 +8,7 @@ import Select from './Select'
 import Input from './Input'
 import Login from './Login'
 import RTE from './RTE'
-import Signup from './SignUp'
+import Signup from './Signup'
 import PostCard from "./PostCard"
 import PostForm from "./post-form/PostForm"
 import AuthLayout from "./AuthLayout"
