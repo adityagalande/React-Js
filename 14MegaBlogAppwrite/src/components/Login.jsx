@@ -16,7 +16,8 @@ function Login() {
     const login = async (data) => {
         setError("");
         try {
-            const session = await authService.loginAccount(data.email, data.password);
+            // const session = await authService.loginAccount(data.email, data.password);
+            const session = await authService.loginAccount(data);
 
             if (session) {
                 const userData = await authService.getCurrentUser();
@@ -64,8 +65,8 @@ function Login() {
 
                         <Input
                             label="password: "
-                            placeholder="Enter your password"
                             type="password"
+                            placeholder="Enter your password"
                             {...register("password", {
                                 required: true,
                             })}

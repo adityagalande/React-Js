@@ -16,7 +16,7 @@ export class DatabasesService {
     }
 
     //create post service in DB-----------------------------------------------------
-    async createPost({ title, slug, content, featuredImage, status, userID }) {
+    async createPost({ title, slug, content, featuredImage, status, userId }) {
         try {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
@@ -27,10 +27,11 @@ export class DatabasesService {
                     content,
                     featuredImage,
                     status,
-                    userID,
+                    userId,
                 })
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: createPost :: error", error);
+            // throw error;
         }
     }
 
@@ -48,20 +49,22 @@ export class DatabasesService {
                 }
             )
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: updatePost :: error", error);
+            // throw error;
         }
     }
 
     async deletePost(slug) {
         try {
-            return await this.databases.deleteDocument(
+            await this.databases.deleteDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug
             )
-            //return true;
+            return true;
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: deletePost :: error", error);
+            return false;
         }
     }
 
@@ -73,7 +76,8 @@ export class DatabasesService {
                 slug
             )
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: getPost :: error", error);
+            return false;
         }
     }
 
@@ -82,10 +86,11 @@ export class DatabasesService {
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                queries
+                queries,
             )
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: getPosts :: error", error);
+            return false;
         }
     }
 
@@ -99,27 +104,29 @@ export class DatabasesService {
                 file,
             )
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: uploadFile :: error", error);
+            return false;
         }
     }
 
-    async deleteFile(fileID) {
+    async deleteFile(fileId) {
         //Here fileID means featuredImage in createPost() in database
         try {
-            return await this.storage.deleteFile(
+            await this.storage.deleteFile(
                 conf.appwriteBucketId,
-                fileID
+                fileId
             )
         } catch (error) {
-            throw error;
+            console.log("Appwrite serive :: deleteFile :: error", error);
+            return false;
         }
     }
 
-    async getFilePreview(fileID) {
+    async getFilePreview(fileId) {
         try {
             return await this.storage.getFilePreview(
                 conf.appwriteBucketId,
-                fileID
+                fileId
             )
         } catch (error) {
             throw error;

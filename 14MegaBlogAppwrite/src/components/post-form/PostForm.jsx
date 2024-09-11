@@ -16,11 +16,11 @@ export default function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         //if edit button pressed then use previous value else create new post then empty vlaue.
         defaultValues: {
-            title: post?.title || '',
-            slug: post?.slug || '',
-            content: post?.content || '',
-            status: post?.status || 'active',
-        }
+            title: post?.title || "",
+            slug: post?.$id || "",
+            content: post?.content || "",
+            status: post?.status || "active",
+        },
     });
 
     const navigate = useNavigate();
@@ -30,11 +30,11 @@ export default function PostForm({ post }) {
     const submit = async (data) => {
         //if we have post (means edit post)
         if (post) {
-            const file = await data.image[0] ? databasesservice.uploadFile(data.image[0]) : null;
+            const file = data.image[0] ? await databasesservice.uploadFile(data.image[0]) : null;
 
             //if file successfully uploaded then delete existing img file from appwrite using post id
             if (file) {
-                await databasesservice.deleteFile(post.featuredImage)
+                databasesservice.deleteFile(post.featuredImage)
             }
 
             const dbPost = await databasesservice.updatePost(post.$id, { ...data, featuredImage: file ? file.$id : undefined });
@@ -49,7 +49,9 @@ export default function PostForm({ post }) {
             if (file) {
                 const fileId = file.$id;
                 data.featuredImage = fileId; //means img url id in appwrite db
-                const dbPost = await databasesservice.createPost({ ...data, userId: userData.$id })
+                // console.log("---->", file)
+                // console.log(userData.$id)
+                const dbPost = await databasesservice.createPost({ ...data, userId: userData.$id });
 
                 //if you got post then redirect user to post
                 if (dbPost) {
@@ -64,22 +66,22 @@ export default function PostForm({ post }) {
             return value
                 .trim()
                 .toLowerCase()
-                .replace(/^[a-zA-Z\d\s]+/g, '-') //excluding a to z, A to Z and spaces and digits everything will be converted to - dash
-                .replace(/\s/g, '-')
+                .replace(/[^a-zA-Z\d\s]+/g, "-") //excluding a to z, A to Z and spaces and digits everything will be converted to - dash
+                .replace(/\s/g, "-");
 
-        return '';
+        return "";
     }, [])
 
-    useEffect((value) => {
+    useEffect(() => {
         const subscription = watch((value, { name }) => {
             if (name === 'title') {
-                setValue('slug', slugTransform(value.title, { shouldValidate: true }))
+                setValue('slug', slugTransform(value.title), { shouldValidate: true });
             }
-        })
+        });
 
 
         return () => {
-            subscription.unsubscribe()
+            subscription.unsubscribe();
         }
     }, [watch, slugTransform, setValue])
 
@@ -106,7 +108,7 @@ export default function PostForm({ post }) {
             <div className="w-1/3 px-2">
                 <Input
                     label="Featured Image :"
-                    placeholder="file"
+                    type="file"
                     className='mb-4'
                     accept="image/png image/jpeg image/jpg image/gif"
                     {...register("image", { required: !post })} />
